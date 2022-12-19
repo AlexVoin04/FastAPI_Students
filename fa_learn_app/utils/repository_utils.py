@@ -71,3 +71,9 @@ def convert_group_dict_to_storage(group_dict: dict) -> GroupStorage:
 
     group_storage = GroupStorage(**group_dict)
     return group_storage
+
+def convert_group_storage_to_out(group: StudentStorage) -> GroupStorage:
+    # Производит конвертацию StudentStorage --> StudentOut
+
+    tmp_dict: dict = group.dict()
+    return GroupStorage(**tmp_dict)

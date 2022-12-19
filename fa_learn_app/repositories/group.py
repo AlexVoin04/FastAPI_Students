@@ -5,7 +5,7 @@ from fa_learn_app.utils.json_repository import data_groups, save_dict_to_json
 from fa_learn_app.utils.repository_utils import \
     convert_group_in_to_storage, \
     update_group_in_storage, \
-    convert_group_dict_to_storage, convert_student_storage_to_out
+    convert_group_dict_to_storage, convert_group_storage_to_out
 
 
 class BaseGroupRepository:
@@ -44,12 +44,8 @@ class GroupJsonRepository(BaseGroupRepository):
 
         group_out_list: List[GroupStorage] = []
         for _, group in data_groups.items():
-            if group == "":
-                group = convert_group_dict_to_storage(group)
-                group_out_list.append(convert_student_storage_to_out(group))
-            elif group.get("group") == group:
-                group = convert_group_dict_to_storage(group)
-                group_out_list.append(convert_student_storage_to_out(group))
+            group = convert_group_dict_to_storage(group)
+            group_out_list.append(convert_group_storage_to_out(group))
         return group_out_list[skip:skip + limit]
 
     def create(self, group: GroupIn) -> GroupStorage:
